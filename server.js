@@ -1,0 +1,10 @@
+const express = require("express");
+const connectDB = require("./config/connectDB");
+const userRoutes = require("./routes/user");
+const app = express();
+require("dotenv").config();
+const port = process.env.port;
+app.use(express.json());
+connectDB();
+app.use("/api/users", userRoutes);
+app.listen(port, () => console.log(`app is runnig on port ${port}`));
