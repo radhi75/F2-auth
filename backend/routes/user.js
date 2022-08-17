@@ -12,7 +12,7 @@ const userRoutes = express.Router();
 userRoutes.post("/register", Validationregister, Validation, Register);
 userRoutes.post("/login", Validationlogin, Validation, login);
 userRoutes.get("/current", isAuth, (req, res) => {
-  res.send({ Oneuser: req.user });
+  res.send(req.user);
 });
 
 module.exports = userRoutes;

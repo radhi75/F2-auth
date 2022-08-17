@@ -7,7 +7,7 @@ exports.Register = async (req, res) => {
   try {
     const found = await user.findOne({ email });
     if (found) {
-      return res.status(400).send({ errors: ["user already existe"] });
+      return res.status(400).send({ errors: [{ msg: "user already existe" }] });
     }
     const newUser = new user(req.body);
     const salt = 10;
@@ -29,16 +29,16 @@ exports.login = async (req, res) => {
   try {
     const founduser = await user.findOne({ email });
     if (!founduser) {
-      return res.status(400).send({ errors: ["user not Found"] });
+      return res.status(400).send({ errors: [{ msg: "user not Found" }] });
     }
     const match = await bcrypt.compare(password, founduser.password);
     if (!match) {
-      return res.status(400).send({ errors: ["bad credential"] });
+      return res.status(400).send({ errors: [{ msg: "bad credential" }] });
     }
     const payload = { id: founduser._id };
     const token = jwt.sign(payload, process.env.SecretorKey);
     res.status(200).send({ msg: "welcome back", founduser, token });
   } catch (error) {
-    res.status(500).send({ error: ["could not logging"] });
+    res.status(500).send({ error: [{ msg: "could not logging" }] });
   }
 };

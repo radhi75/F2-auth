@@ -1,11 +1,11 @@
 const { body, validationResult } = require("express-validator");
 exports.Validationregister = [
   body("email", "please add a valid email").isEmail(),
-  body("password", "at least 6 caractes").isLength({ min: 6 }),
+  body("password", "your password at least 6 caractes").isLength({ min: 6 }),
 ];
 exports.Validationlogin = [
   body("email", "please add a valid email").isEmail(),
-  body("password", "at least 6 caractes").isLength({ min: 6 }),
+  body("password", "bad credential").isLength({ min: 6 }),
 ];
 
 exports.Validation = (req, res, next) => {
